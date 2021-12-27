@@ -1,0 +1,15 @@
+<!--pages/aboutus/aboutus.wxml-->
+<view class="about-us">
+<image src="../../img/icon1.png" class="about-us-logo"></image>
+<view class="about-us-wrap">
+<text>近年来，随着中国经济的快速发展和人民生活水平的不断提高，出国工作、学习、旅游、越来越普遍，每年出境人数以千万人次的速度增长。未来，随着“一带一路”战略的推进实施，中国企业大规模、高水平地走出去，中国公民出国的次数将进一步增加，在海外停留的时间进一步延长，范围也将进一步拓展。</text>
+<image src="../../img/icon2.png" class="about-us-img"></image>
+<text>但是，当今世界并不太平，地震、火山、 海啸、恐袭、冲突、示威、骚乱、传染病、车祸以及各种社、会治安案件层出不穷，严重威胁着广大海外中国企业和公民的安全。</text>
+<image src="../../img/icon3.png" class="about-us-img"></image>
+<text>平安天眼是一个基于云计算和人工智能（AI）的互联网安全信息搜索引擎与安全 状况评估系统，能自动对互联网上出现的 安全事件报道进行跟踪搜索，目前已累计搜索存储了近50万条全球安全事件数据。根据这些数据和评估模型，平安天眼能够对全球各个城市的实时安全状况进行评价 ，让您在出国旅行时能够准确掌握目的地 安全状况，提前防范各种安全风险，保护您在海外旅行的平安。</text>
+<image src="../../img/icon4.png" class="about-us-img"></image>
+<text>平安天眼，服务“一带一路”倡议，保护海外中国企业和公民安全。</text>
+<image src="../../img/icon5.png" class="about-us-img"></image>
+<text>商务合作请致电：400-961-1230</text>
+</view>
+</view>

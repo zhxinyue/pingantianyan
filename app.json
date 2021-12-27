@@ -1,0 +1,42 @@
+{
+  "pages": [
+    "pages/news/news",
+    "pages/newsdetail/newsdetail",
+    "pages/aboutus/aboutus",
+
+    "pages/index/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#BFBFBF",
+    "selectedColor": "#2A3B59",
+    "borderStyle": "black",
+    "backgroundColor": "#FFF",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "城市安全分析",
+      "iconPath": "./img/tab1.png",
+      "selectedIconPath": "./img/tab1_act.png"
+    },
+    {
+      "pagePath": "pages/news/news",
+      "text": "全球72小时安全信息",
+      "iconPath": "./img/tab2.png",
+      "selectedIconPath": "./img/tab2_act.png"
+    },
+    {
+      "pagePath": "pages/aboutus/aboutus",
+      "text": "关于我们",
+      "iconPath": "./img/tab3.png",
+      "selectedIconPath": "./img/tab3_act.png"
+    }]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

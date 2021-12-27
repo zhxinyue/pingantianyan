@@ -1,0 +1,17 @@
+<!--pages/news/news.wxml-->
+<view class="news-wrap">
+  <image src="../../img/icon6.png" class="news-img"></image>
+  <view class="select-view">点击选择近72小时内发生安全事件的国家
+    <image src="../../img/icon7.png" class="select-img"></image>
+  </view>
+  <view class="news-list" wx:for="{{newsList}}" wx:key="index"  bindtap="goDetail">
+    <view class="news-left">
+      <view class="news-list-text">近期曼谷遭遇了近半个世纪以来最大的洪灾</view>
+      <text class="news-list-time">2021-08-17 10:36</text>
+    </view>
+    <view class="news-right">
+      <image src="../../img/icon6.png" class="news-list-img"></image>
+    </view>
+  </view>
+ 
+</view>

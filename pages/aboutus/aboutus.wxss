@@ -1,0 +1,19 @@
+/* pages/aboutus/aboutus.wxss */
+.about-us{
+  padding: 20rpx;
+}
+.about-us-logo{
+  width:512rpx;
+  height:126rpx;
+}
+.about-us-wrap{
+  padding: 20rpx;
+  font-size: 30rpx;
+  line-height: 50rpx;
+
+}
+.about-us-img{
+  width:670rpx;
+  height:376rpx;
+  margin: 30rpx 0;
+}
