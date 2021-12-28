@@ -1,57 +1,122 @@
 /* pages/news/news.wxss */
-.news-wrap{
-  padding:  0 24rpx;
+.news-wrap {
+  padding: 0 24rpx;
 }
-.news-img{
+
+.news-img {
   width: 702rpx;
   height: 308rpx;
 }
-.select-view{
+
+.select-view {
   width: 680rpx;
-height: 70rpx;
-border: 3rpx solid #4692C4;
-border-radius: 15rpx;
-margin: 30rpx auto;
-font-size: 30rpx;
-color: #4692C4;
-line-height: 70rpx;
-text-align: center;
+  height: 70rpx;
+  border: 3rpx solid #4692C4;
+  border-radius: 15rpx;
+  margin: 30rpx auto;
+  font-size: 30rpx;
+  color: #4692C4;
+  line-height: 70rpx;
+  text-align: center;
 }
-.select-img{
-  width:14rpx;
-  height:24rpx;
+
+.select-img {
+  width: 14rpx;
+  height: 24rpx;
 }
-.news-list{
-  width:700rpx;
+
+.news-list {
+  width: 700rpx;
   height: 185rpx;
   margin: 0 auto;
   border-bottom: 1rpx solid #F2F2F2;
   display: flex;
 }
-.news-left{
-flex:1;
+
+.news-left {
+  flex: 1;
 }
-.news-right{
-  width:224rpx;
+
+.news-right {
+  width: 224rpx;
   height: 185rpx;
 }
-.news-list-img{
+
+.news-list-img {
   width: 224rpx;
-height: 150rpx;
-margin-top:17rpx;
+  height: 150rpx;
+  margin-top: 17rpx;
 }
-.news-list-text{
+
+.news-list-text {
   font-size: 30rpx;
   line-height: 42rpx;
   padding: 20rpx 0;
   text-overflow: -o-ellipsis-lastline;
-overflow: hidden;
-text-overflow: ellipsis;
-display: -webkit-box;
--webkit-line-clamp: 2;
--webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
-.news-list-time{
+
+.news-list-time {
   font-size: 26rpx;
   color: #A4A4A4;
+}
+.wx-popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .5);
+  z-index: 2;
+}
+
+.popup-container {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 100%;
+  border-radius: 20rpx 20rpx 0 0;
+  box-sizing: border-box;
+  background: #fff;
+  padding: 0 0 20rpx;
+}
+.popup-title{
+  padding: 20rpx 0;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: bold;
+  color:#141414 ;
+}
+.close-img{
+  width:26rpx;
+  height: 26rpx;
+  float: right;
+  margin-right: 40rpx;
+  margin-top:6rpx;
+}
+.popup-list{
+  padding: 20rpx 13rpx;
+}
+.list-item{
+  width:167rpx;
+  height:64rpx;
+  text-align: center;
+  line-height: 64rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #9D9D9D;
+  font-size: 26rpx;
+  color:#464646;
+  margin:12rpx 7rpx;
+  display: inline-block;
+  border-radius: 10rpx;
+}
+.list-item.list-item-active{
+  background: #4692C4;
+  border: none;
+  color:#fff;
 }

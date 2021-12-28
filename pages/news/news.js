@@ -8,11 +8,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    newsList: [{},{}],
+    newsList: [{}, {}],
+    countryList:[{}, {},{}, {},{}, {},{}, {},{}, {},{}, {},{}, {},{}, {},],
     pageInfo: {
       pageIndex: 1,
       pageLimit: 10
     },
+    popFlag: false
   },
 
   /**
@@ -28,7 +30,18 @@ Page({
       })
     })
   },
-  goDetail(){},
+  // 显示关闭选择国家弹窗
+  togglePop() {
+    this.setData({
+      popFlag: !this.data.popFlag
+    })
+  },
+  toPath(e) {
+    const path = e.currentTarget.dataset.path
+    wx.navigateTo({
+      url: `/pages/${path}/${path}`
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

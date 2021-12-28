@@ -1,2 +1,13 @@
 <!--pages/newsdetail/newsdetail.wxml-->
-<text>pages/newsdetail/newsdetail.wxml</text>
+<view class="newsdetail-wrap">
+  <view class="newsdetail-title">泰国46个府遭遇多种极端天气带来的自然灾害</view>
+  <view class="newsdetail-tip"><text>泰国</text> 2020-12-18 00:39</view>
+  <view class="newsdetail-content">近一段时间，立陶宛政府不顾中方反复交涉、晓以
+    利害，宣布允许台湾当局以“台湾”名义设立“代表处
+    ”。此举公然违背中立两国建交公报精神，严重损害
+    中国主权和领土完整。中国政府对此表示坚决反对，
+    决定召回中国驻立陶宛大使，并要求立政府召回驻
+    中国大使。
+    <image src="../../img/icon4.png"></image>
+  </view>
+</view>
