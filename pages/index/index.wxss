@@ -1,22 +1,152 @@
 /**index.wxss**/
-.index-top{
-  width:100%;
-  height:694rpx;
+.index-wrap {
+  background: #F9F9F9;
+  padding-bottom: 30rpx;
+}
+
+.index-top {
+  width: 100%;
+  height: 694rpx;
   position: relative;
 }
-.top-bg{
+
+.top-bg {
   position: absolute;
-  top:0;
-  left:0;
-  width:100%;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 694rpx;
 }
-.input-wrap{
+
+.input-wrap {
   width: 700rpx;
-height: 90rpx;
-background: #FFFFFF;
-border-radius: 15rpx;
-position: absolute;
-left:25rpx;
-top:287rpx;
+  height: 90rpx;
+  background: #FFFFFF;
+  border-radius: 15rpx;
+  position: absolute;
+  left: 25rpx;
+  top: 287rpx;
+  display: flex;
+  align-items: center;
+}
+
+.input-style {
+  width: 410rpx;
+  height: 90rpx;
+  padding-left: 20rpx;
+  font-size: 32rpx;
+}
+
+.input-close {
+  width: 47rpx;
+  height: 47rpx;
+  margin-right: 25rpx;
+}
+
+.input-search {
+  width: 200rpx;
+  height: 90rpx;
+  background: #4D93B4;
+  font-size: 30rpx;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 15rpx 15rpx 0;
+}
+
+.search-img {
+  width: 46rpx;
+  height: 46rpx;
+  margin-left: 5rpx;
+}
+
+.hot-wrap {
+  position: absolute;
+  top: 410rpx;
+  left: 25rpx;
+  width: 700rpx;
+}
+
+.hot-title {
+  height: 30rpx;
+  font-size: 30rpx;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.hot-image {
+  width: 26rpx;
+  height: 34rpx;
+  margin-right: 10rpx;
+}
+
+.hot-box {
+  width: 700rpx;
+  height: 250rpx;
+  background: #122038;
+  border-radius: 20rpx;
+  margin-top: 25rpx;
+  padding: 10rpx 30rpx;
+  box-sizing: border-box;
+}
+
+.hot-list {
+  width: 33%;
+  height: 40rpx;
+  line-height: 40rpx;
+  color: #79C2E5;
+  font-size: 28rpx;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-wrap {
+  width: 700rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  margin: 40rpx auto 0;
+}
+
+.data-title {
+  font-size: 36rpx;
+  color: #333;
+  width: 670rpx;
+  margin: 0 auto;
+  border-bottom: 2rpx solid #F2F2F2;
+  text-align: center;
+  line-height: 100rpx;
+}
+
+.data-list {
+  padding: 20rpx 0;
+  display: flex;
+  align-items: center;
+  margin: 0 20rpx;
+  border-bottom: 1rpx solid #F2F2F2;
+}
+
+.data-img {
+  width: 78rpx;
+  height: 78rpx;
+  margin-right: 28rpx;
+}
+
+.data-right {
+  flex: 1;
+}
+
+.list-title {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.list-text {
+  font-size: 24rpx;
+  color: #A4A4A4;
+  line-height: 42rpx;
 }

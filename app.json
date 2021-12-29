@@ -1,11 +1,9 @@
 {
   "pages": [
+    "pages/citydetail/citydetail",
     "pages/index/index",
-
     "pages/news/news",
-
     "pages/newsdetail/newsdetail",
-
     "pages/aboutus/aboutus"
 
   ],

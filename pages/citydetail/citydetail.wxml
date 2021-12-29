@@ -1,0 +1,17 @@
+<!--pages/citydetail/citydetail.wxml-->
+<view class="citydetail-wrap">
+  <view class="citydetail-top">
+    <image src="../../img/icon19.png" class="top-logo"></image>
+    <view class="input-wrap">
+      <input value="{{cityName}}" type="text" class="input-style" placeholder="输入您所关心的城市" bindinput="getCityNameVal" />
+      <image src="../../img/icon10.png" class="input-close" bindtap="delIptVal"></image>
+      <view class="input-search" bindtap="searchIptVal">
+        <image src="../../img/icon11.png" class="search-img"></image>
+      </view>
+    </view>
+  </view>
+<view class="position-wrap">
+<image src="../../img/icon20.png" class="position-img"></image>
+<text>当前查询城市：泰国-曼谷</text>
+</view>
+</view>

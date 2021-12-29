@@ -1,9 +1,62 @@
 <!--index.wxml-->
 <view class="index-wrap">
-<view class="index-top">
-  <image src="../../img/icon9.png" class="top-bg"></image>
-  <view class="input-wrap">
-  <input type="text"/>
+  <view class="index-top">
+    <image src="../../img/icon9.png" class="top-bg"></image>
+    <view class="input-wrap">
+      <input value="{{cityName}}" type="text" class="input-style" placeholder="输入您所关心的城市" bindinput="getCityNameVal" />
+      <image src="../../img/icon10.png" class="input-close" bindtap="delIptVal"></image>
+      <view class="input-search"><text>安全指数</text>
+        <image src="../../img/icon11.png" class="search-img" bindtap="searchIptVal"></image>
+      </view>
+    </view>
+    <view class="hot-wrap">
+      <view class="hot-title">
+        <image src="../../img/icon12.png" class="hot-image"></image> 热点城市搜索：
+      </view>
+      <view class="hot-box">
+        <text class="hot-list">美国 ·纽约</text>
+        <text class="hot-list">美国 ·纽约</text>
+        <text class="hot-list">美国 ·纽约</text>
+        <text class="hot-list">美国 ·纽约约约约约</text>
+      </view>
+    </view>
   </view>
-</view>
+  <view class="data-wrap">
+    <view class="data-title">安全后盾</view>
+    <view class="data-list">
+      <image src="../../img/icon13.png" class="data-img"></image>
+      <view class="data-right">
+        <view class="list-title">200+安全数据源</view>
+        <view class="list-text">覆盖全球绝大部分安全信息提供方，免费查询</view>
+      </view>
+    </view>
+    <view class="data-list">
+      <image src="../../img/icon14.png" class="data-img"></image>
+      <view class="data-right">
+        <view class="list-title">1000,000+海量安全信息</view>
+        <view class="list-text">储存各国海量安全信息，对全球各个城市安全形势进行动态画像。</view>
+      </view>
+    </view>
+    <view class="data-list">
+      <image src="../../img/icon15.png" class="data-img"></image>
+      <view class="data-right">
+        <view class="list-title">更权威数据库</view>
+        <view class="list-text">数据与全球各大权威安全信息网站同步，实时更新。</view>
+      </view>
+    </view>
+    <view class="data-list">
+      <image src="../../img/icon16.png" class="data-img"></image>
+      <view class="data-right">
+        <view class="list-title">更全面数据覆盖</view>
+        <view class="list-text">自然灾害、战争冲突、游行示威、恐怖袭击、传染疫病、社会治安...</view>
+      </view>
+    </view>
+    <view class="data-list">
+      <image src="../../img/icon17.png" class="data-img"></image>
+      <view class="data-right">
+        <view class="list-title">更精确数据定位</view>
+        <view class="list-text">覆盖全球绝大部分安全信息提供方，免费查询。</view>
+      </view>
+    </view>
+  </view>
 </view>
