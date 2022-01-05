@@ -4,7 +4,10 @@
     <image src="../../img/icon9.png" class="top-bg"></image>
     <view class="input-wrap">
       <input value="{{cityName}}" type="text" class="input-style" placeholder="输入您所关心的城市" bindinput="getCityNameVal" />
-      <image src="../../img/icon10.png" class="input-close" bindtap="delIptVal"></image>
+      <view class="del-view" bindtap="delIptVal">
+        <image src="../../img/icon10.png" class="input-close"></image>
+      </view>
+
       <view class="input-search"><text>安全指数</text>
         <image src="../../img/icon11.png" class="search-img" bindtap="searchIptVal"></image>
       </view>
@@ -57,6 +60,14 @@
         <view class="list-title">更精确数据定位</view>
         <view class="list-text">覆盖全球绝大部分安全信息提供方，免费查询。</view>
       </view>
+    </view>
+  </view>
+  <!-- 搜索提示 -->
+  <view class="wx-popup" catchtouchmove="true" wx:if="{{popFlag}}">
+    <view class="popup-container-center">
+      <image src="../../img/icon18.png" class="pop-img"></image>
+      <text class="pop-text">请输入正确的搜索内容！</text>
+      <view class="pop-button" bindtap="closePopup">确 认</view>
     </view>
   </view>
 </view>

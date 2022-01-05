@@ -4,7 +4,8 @@ const app = getApp()
 
 Page({
   data: {
-    cityName: ''
+    cityName: '',
+    popFlag:false
   },
 
   onLoad() {
@@ -21,6 +22,20 @@ Page({
     })
   },
   searchIptVal() {
-
+    if(this.data.cityName==''){
+      this.setData({
+        popFlag:!this.data.popFlag
+      })
+    }else{
+       wx.navigateTo({
+      url: `/pages/citydetail/citydetail`
+    })
+    }
+   
+  },
+  closePopup(){
+    this.setData({
+      popFlag:!this.data.popFlag
+    })
   }
 })

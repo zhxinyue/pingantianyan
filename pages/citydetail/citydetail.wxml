@@ -10,8 +10,88 @@
       </view>
     </view>
   </view>
-<view class="position-wrap">
-<image src="../../img/icon20.png" class="position-img"></image>
-<text>当前查询城市：泰国-曼谷</text>
-</view>
+  <view class="position-wrap">
+    <image src="../../img/icon20.png" class="position-img"></image>
+    <text>当前查询城市：泰国-曼谷</text>
+  </view>
+  <view class="score-wrap">
+    <view class="score-data">
+      <view class="score-top">80分</view>
+      <view class="score-bottom">
+        <image src="../../img/icon21.png" class="score-img1"></image> 综合安全分数
+      </view>
+    </view>
+    <view class="score-data">
+      <view class="score-top">较好 <text class="score-top-text">（可以前往）</text></view>
+      <view class="score-bottom">
+        <image src="../../img/icon22.png" class="score-img2"></image> 安全水平等级
+      </view>
+    </view>
+  </view>
+  <view class="title-style">事件安全分析</view>
+  <view class="sfaty-data">
+    <text class="sfaty-list {{sfatyActive==index?'sfaty-list-active':''}}" wx:for="{{sfatyList}}" wx:key="index" data-index="{{index}}" bindtap="chooseSfaty">{{item.name}}</text>
+  </view>
+  <view class="ec_view">
+    <ec-canvas id="mychart-dom-graph" canvas-id="mychart-graph" ec="{{ ecRadar }}" data-record="{{recordData}}" bind:init="echartInit"></ec-canvas>
+  </view>
+  <view class="ec_view" wx:if="{{sfatyActive!=0}}">
+    <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ecLine }}"></ec-canvas>
+  </view>
+  <block wx:if="{{sfatyActive!=0}}">
+    <view class="title-style">近日安全信息</view>
+    <view class="sfaty-info" wx:for="{{sfatyInfo}}" wx:key="index" bindtap="toPath" data-path="newsdetail">
+      <view class="news-left">
+        <view class="news-list-text">近期曼谷遭遇了近半个世纪以来最大的洪灾</view>
+        <text class="news-list-time">2021-08-17 10:36</text>
+      </view>
+      <view class="news-right">
+        <image src="../../img/icon6.png" class="news-list-img"></image>
+      </view>
+    </view>
+  </block>
+  <view class="title-style">近3天天气情况</view>
+  <view class="title-style">本年天气情况</view>
+  <block wx:if="{{true}}">
+    <view class="year-title">
+      <text class="year-text1">月份</text>
+      <text class="year-text2">日均最低温度</text>
+      <text class="year-text3">日均最高温度</text>
+      <text class="year-text4">平均总降水量</text>
+      <text class="year-text5">平均降水系数</text>
+    </view>
+    <view class="year-title year-data" wx:for="{{yearData}}" wx:key="index">
+      <text class="year-text1">{{index+1}}月</text>
+      <text class="year-text2">21.0</text>
+      <text class="year-text3">32.0</text>
+      <text class="year-text4">32.0</text>
+      <text class="year-text5">32.0</text>
+    </view>
+    <view class="toggle-wrap">
+      <text>点击展开全部></text>
+    </view>
+  </block>
+  <view class="no-list" wx:else>
+    <image src="../../img/icon23.png" class="no-img"></image>
+    <view class="no-text">暂无本年天气情况</view>
+  </view>
+  <view class="title-style">实用信息指南</view>
+  <view class="sfaty-data">
+    <text class="sfaty-list {{infoActive==index?'sfaty-list-active':''}}" wx:for="{{infoList}}" wx:key="index" data-index="{{index}}" bindtap="chooseInfo">{{item.name}}</text>
+  </view>
+  <block wx:if="{{true}}">
+    <view class="info-data">【国名】泰王国（The Kingdom of Thailand）。
+    【面积】51.3万平方公里。、马来西亚接壤，
+    东南临泰国湾（太平洋），西南濒安达曼海（印度洋）,
+    属热带季风气候，全年分为热、雨、凉三季，年均气温
+    27℃。
+    【首都】曼谷（Bangkok），人口800万</view>
+  <view class="toggle-wrap">
+    <text>点击展开全部></text>
+  </view>
+  </block>
+  <view class="no-list" wx:else>
+    <image src="../../img/icon23.png" class="no-img"></image>
+    <view class="no-text">暂无实用信息指南</view>
+  </view>
 </view>

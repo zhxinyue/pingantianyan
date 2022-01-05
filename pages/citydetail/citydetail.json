@@ -1,4 +1,4 @@
 {
-  "usingComponents": {},
+  "usingComponents": {"ec-canvas":"../../ec-canvas/ec-canvas"},
   "navigationBarTitleText":"城市名称"
 }
