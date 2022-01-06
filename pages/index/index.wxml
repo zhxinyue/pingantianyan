@@ -7,7 +7,6 @@
       <view class="del-view" bindtap="delIptVal">
         <image src="../../img/icon10.png" class="input-close"></image>
       </view>
-
       <view class="input-search"><text>安全指数</text>
         <image src="../../img/icon11.png" class="search-img" bindtap="searchIptVal"></image>
       </view>

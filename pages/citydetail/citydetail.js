@@ -7,20 +7,50 @@ Page({
    */
   data: {
     cityName: '',
-    sfatyList:[{name:'综合安全'},{name:'战争冲突'},{name:'恐怖袭击'},{name:'自然灾害'},{name:'示威骚乱'},{name:'社会治安'},{name:'传染疫病'}],
-    sfatyActive:0,
-    infoList:[{name:'国家概况'},{name:'入境居留'},{name:'安全保护'},{name:'交通出行'},{name:'物价医疗'},{name:'实用信息'},{name:'使馆信息'}],
-    infoActive:0,
-    sfatyInfo:[{},{},{}],
-    yearData:[{},{},{},{},{},{},{},{},{},{},{},{}],
-     //echarts数据
-     ecRadar: {
+    sfatyList: [{
+      name: '综合安全'
+    }, {
+      name: '战争冲突'
+    }, {
+      name: '恐怖袭击'
+    }, {
+      name: '自然灾害'
+    }, {
+      name: '示威骚乱'
+    }, {
+      name: '社会治安'
+    }, {
+      name: '传染疫病'
+    }],
+    sfatyActive: 0,
+    infoList: [{
+      name: '国家概况'
+    }, {
+      name: '入境居留'
+    }, {
+      name: '安全保护'
+    }, {
+      name: '交通出行'
+    }, {
+      name: '物价医疗'
+    }, {
+      name: '实用信息'
+    }, {
+      name: '使馆信息'
+    }],
+    infoActive: 0,
+    sfatyInfo: [{}, {}, {}],
+    yearData: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
+    yearDataShow: [{}, {}, {}, {}, {}, {}],
+    toggleFlag: true,
+    //echarts数据
+    ecRadar: {
       onInit: initChartRadar
     },
     ecLine: {
       onInit: initChartLine
     },
-    
+
   },
 
   /**
@@ -42,15 +72,29 @@ Page({
   searchIptVal() {
 
   },
-  chooseSfaty(e){
+  chooseSfaty(e) {
     this.setData({
-      sfatyActive:e.target.dataset.index
+      sfatyActive: e.target.dataset.index
     })
   },
-  chooseInfo(e){
+  chooseInfo(e) {
     this.setData({
-      infoActive:e.target.dataset.index
+      infoActive: e.target.dataset.index
     })
+  },
+  toggleYear() {
+    this.setData({
+      toggleFlag: !this.data.toggleFlag
+    })
+    if (this.data.toggleFlag) {
+      this.setData({
+        yearDataShow: this.data.yearData.slice(0, 6)
+      })
+    } else {
+      this.setData({
+        yearDataShow: this.data.yearData
+      })
+    }
   },
   echartInit(e) {
     let recordData = e.target.dataset.record;
@@ -79,33 +123,35 @@ function initChartRadar(canvas, width, height) {
     },
     radar: {
       indicator: [{
-        name: '战争冲突',
-        max: 100
-      },
-      {
-        name: '恐怖袭击',
-        max: 100
-      },
-      {
-        name: '示威骚乱',
-        max: 100
-      },
-      {
-        name: '传染疫病',
-        max: 100
-      },
-      {
-        name: '社会治安',
-        max: 100
-      },
-      {
-        name: '自然灾害',
-        max: 100
-      }
+          name: '战争冲突',
+          max: 100
+        },
+        {
+          name: '恐怖袭击',
+          max: 100
+        },
+        {
+          name: '示威骚乱',
+          max: 100
+        },
+        {
+          name: '传染疫病',
+          max: 100
+        },
+        {
+          name: '社会治安',
+          max: 100
+        },
+        {
+          name: '自然灾害',
+          max: 100
+        }
       ],
-      name:{
-        textStyle:{color:'#6B6B6B'}
-       },
+      name: {
+        textStyle: {
+          color: '#6B6B6B'
+        }
+      },
       splitArea: {
         show: true,
         areaStyle: {
@@ -113,15 +159,14 @@ function initChartRadar(canvas, width, height) {
         }
       },
     },
-  
+
     series: [{
       name: '预算 vs 开销',
       type: 'radar',
       data: [{
         value: [30, 40, 50, 70, 90, 80],
         name: '预算'
-      }
-      ]
+      }]
     }]
   };
   option.radar.indicator[0].axisLabel = {
@@ -162,25 +207,25 @@ function initChartLine(canvas, width, height) {
           fontSize: 12
         },
         interval: 0,
-        formatter:function(value){  
-            var str = ""; 
-            var num = 2; //每行显示字数 
-            var valLength = value.length; //该项x轴字数  
-            var rowNum = Math.ceil(valLength / num); // 行数  
-            if(rowNum > 1) {
-                for(var i = 0; i < rowNum; i++) {
-                    var temp = "";
-                    var start = i * num;
-                    var end = start + num;
-                    temp = value.substring(start, end) + "\n";
-                    str += temp; 
-                }
-                return str;
-            } else {
-                return value;
-            } 
+        formatter: function (value) {
+          var str = "";
+          var num = 2; //每行显示字数 
+          var valLength = value.length; //该项x轴字数  
+          var rowNum = Math.ceil(valLength / num); // 行数  
+          if (rowNum > 1) {
+            for (var i = 0; i < rowNum; i++) {
+              var temp = "";
+              var start = i * num;
+              var end = start + num;
+              temp = value.substring(start, end) + "\n";
+              str += temp;
+            }
+            return str;
+          } else {
+            return value;
+          }
         }
-    }
+      }
     },
     yAxis: {
       x: 'center',
