@@ -1,26 +1,19 @@
 // pages/citydetail/citydetail.js
 import * as echarts from '../../ec-canvas/echarts';
+import {
+  $getCityScore
+} from '../../utils/api'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    cityItem:{},
+    cityDetail:{},
     cityName: '',
     sfatyList: [{
-      name: '综合安全'
-    }, {
-      name: '战争冲突'
-    }, {
-      name: '恐怖袭击'
-    }, {
-      name: '自然灾害'
-    }, {
-      name: '示威骚乱'
-    }, {
-      name: '社会治安'
-    }, {
-      name: '传染疫病'
+      scoName: '综合安全'
     }],
     sfatyActive: 0,
     infoList: [{
@@ -57,8 +50,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+// this.setData({
+//   cityItem:JSON.parse(wx.getStorageSync('item'))
+// })
+this.setData({
+  cityItem:{"stateNameCn":"纽约州","stateNameEn":"New York","cityNameCn":"罗切斯特","countryNameCn":"美国","cityNameEn":"Rochester","cityId":"ct20210913150658811","countryId":"cou20210913102855592","countryNameEn":"United States"}
+})
+console.log(this.data.cityItem)
+wx.setNavigationBarTitle({
+  title: this.data.cityItem.cityNameCn
+})
+this.getCityScore()
   },
+
   getCityNameVal(e) {
     this.setData({
       cityName: e.detail.value
@@ -71,6 +75,17 @@ Page({
   },
   searchIptVal() {
 
+  },
+  getCityScore(){
+    $getCityScore(this.data.cityItem.cityId).then(res => {
+      console.log(res.data.citySafetyArray)
+      const array =JSON.parse(JSON.stringify(this.data.sfatyList)).concat(res.data.citySafetyArray)
+        this.setData({
+          cityDetail: res.data,
+          sfatyList:array
+        })
+        // echartInitRadar(res.data.citySafetyArray)
+    })
   },
   chooseSfaty(e) {
     this.setData({
@@ -96,11 +111,12 @@ Page({
       })
     }
   },
-  echartInit(e) {
-    let recordData = e.target.dataset.record;
-    if (recordData.thisExam.length > 0) {
-      initChart(e.detail.canvas, e.detail.width, e.detail.height, recordData);
-    }
+  echartInitRadar(e) {
+  // console.log(record)
+    // const recordData = e.target.dataset.record;
+  
+    // console.log(this.data.cityDetail.citySafetyArray)
+    this.data.cityDetail.citySafetyArray?.length &&  initChartRadar(e.detail.canvas, e.detail.width, e.detail.height, this.data.cityDetail.citySafetyArray);
   }
 
 })
@@ -111,7 +127,18 @@ function initChartRadar(canvas, width, height) {
     height: height
   });
   canvas.setChart(chart);
-
+console.log(cityDetail.citySafetyArray)
+const indicatorList = recordData.map((item)=>{
+  return {
+    name:item.scoName
+  }
+})
+const seriesData =  recordData.map((item)=>{
+  return item.cityScore
+  
+})
+console.log('indicatorList'+indicatorList)
+console.log('seriesData'+seriesData)
   var option = {
     backgroundColor: "#ffffff",
     color: "#07466F",
@@ -161,10 +188,9 @@ function initChartRadar(canvas, width, height) {
     },
 
     series: [{
-      name: '预算 vs 开销',
       type: 'radar',
       data: [{
-        value: [30, 40, 50, 70, 90, 80],
+        value: [30, -40,-130, 70, 90, 80],
         name: '预算'
       }]
     }]

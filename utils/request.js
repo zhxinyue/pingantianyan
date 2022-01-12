@@ -1,17 +1,17 @@
 
 class Ajax {
   constructor() {
-    this.baseUrl =''// 'https://prod-sbjb-user-api.peogoo.com' // 正式环境接口url  
+    this.baseUrl ='https://www.tianeye.cn'// 正式环境接口url  
     // this.baseUrl = 'http://10.1.1.31:8097' // 开发环境接口url
     //  this.baseUrl = 'https://test-sbjb-user-api.peogoo.com' // 测试环境接口url
     this.header = {}
-    if (!wx.getStorageSync('token')) {
-      this.getToken().then(token => {
-        this.header.token = token
-      })
-    } else {
-      this.header.token = wx.getStorageSync('token')
-    }
+    // if (!wx.getStorageSync('token')) {
+    //   this.getToken().then(token => {
+    //     this.header.token = token
+    //   })
+    // } else {
+    //   this.header.token = wx.getStorageSync('token')
+    // }
   }
 
   showLoading() {
@@ -67,7 +67,8 @@ class Ajax {
             return resolve(res.data)
           }
           // 成功状态码 200
-          if (res.data.code !== 200) {
+          if ( res.data.code !== 0) {
+            resolve(res.data)
             return this.errorTip(res.data.message || res.errMsg)
           }
           resolve(res.data)

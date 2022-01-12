@@ -11,15 +11,19 @@
         <image src="../../img/icon11.png" class="search-img" bindtap="searchIptVal"></image>
       </view>
     </view>
+    <view class="search-wrap" wx:if="{{matchCityList.length>0}}">
+      <view class="search-word" wx:for="{{matchCityList}}"  wx:key="index" bindtap="searchIptVal" data-item="{{item}}">
+        <image src="../../img/icon20.png" class="word-img"></image>
+        {{item.countryNameCn}}-{{item.cityNameCn}}
+      </view>
+
+    </view>
     <view class="hot-wrap">
       <view class="hot-title">
         <image src="../../img/icon12.png" class="hot-image"></image> 热点城市搜索：
       </view>
       <view class="hot-box">
-        <text class="hot-list">美国 ·纽约</text>
-        <text class="hot-list">美国 ·纽约</text>
-        <text class="hot-list">美国 ·纽约</text>
-        <text class="hot-list">美国 ·纽约约约约约</text>
+        <text class="hot-list" wx:for="{{popularCityList}}" wx:key="index">{{item.countryNameCn}} · {{item.cityNameCn}}</text>
       </view>
     </view>
   </view>

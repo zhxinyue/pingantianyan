@@ -4,14 +4,17 @@
   <view class="select-view" bindtap="togglePop">点击选择近72小时内发生安全事件的国家
     <image src="../../img/icon7.png" class="select-img"></image>
   </view>
-  <view class="news-list" wx:for="{{newsList}}" wx:key="index" bindtap="toPath" data-path="newsdetail">
-    <view class="news-left">
-      <view class="news-list-text">近期曼谷遭遇了近半个世纪以来最大的洪灾</view>
-      <text class="news-list-time">2021-08-17 10:36</text>
+  <view wx:for="{{eventArray}}" wx:key="index" wx:for-item='item' wx:if="{{activeCity==''||activeCity==item.cityId}}">
+    <view class="news-list" wx:for="{{item.newsArray}}" wx:for-item='it' bindtap="toPath" data-path="newsdetail" data-detail="{{it}}">
+      <view class="news-left">
+        <view class="news-list-text">{{it.snTitle}}</view>
+        <text class="news-list-time">{{it.snCreatetime}}</text>
+      </view>
     </view>
-    <view class="news-right">
+    <!-- TODO: 目前没有图片字段 -->
+    <!-- <view class="news-right">
       <image src="../../img/icon6.png" class="news-list-img"></image>
-    </view>
+    </view> -->
   </view>
   <!-- 选择国家 -->
   <view class="wx-popup" catchtouchmove="true" wx:if="{{popFlag}}">
@@ -19,8 +22,7 @@
       <view class="popup-title">近72小时内发生安全事件的国家 <image src="../../img/icon8.png" class="close-img" bindtap="togglePop"></image>
       </view>
       <view class="popup-list">
-      <text class="list-item" wx:for="{{countryList}}" wx:key="index">泰国</text>
-      <text class="list-item list-item-active">泰国</text>
+        <text class="list-item {{activeCity==item.cityId?'list-item-active':''}}" wx:for="{{eventArray}}" wx:key="index" bindtap="chooseCity" data-cityid="{{item.cityId}}">{{item.countryNameCn}}</text>
       </view>
     </view>
   </view>

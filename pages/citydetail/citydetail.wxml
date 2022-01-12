@@ -14,17 +14,17 @@
   </view>
   <view class="position-wrap">
     <image src="../../img/icon20.png" class="position-img"></image>
-    <text>当前查询城市：泰国-曼谷</text>
+    <text>当前查询城市：{{cityItem.countryNameCn}}-{{cityItem.cityNameCn}}</text>
   </view>
   <view class="score-wrap">
     <view class="score-data">
-      <view class="score-top">80分</view>
+      <view class="score-top">{{cityDetail.cityComprehensiveScore}}分</view>
       <view class="score-bottom">
         <image src="../../img/icon21.png" class="score-img1"></image> 综合安全分数
       </view>
     </view>
     <view class="score-data">
-      <view class="score-top">较好 <text class="score-top-text">（可以前往）</text></view>
+      <view class="score-top">{{cityDetail.ScoreGrade}} <text class="score-top-text">（{{cityDetail.travelSuggestions}}）</text></view>
       <view class="score-bottom">
         <image src="../../img/icon22.png" class="score-img2"></image> 安全水平等级
       </view>
@@ -32,10 +32,11 @@
   </view>
   <view class="title-style">事件安全分析</view>
   <view class="sfaty-data">
-    <text class="sfaty-list {{sfatyActive==index?'sfaty-list-active':''}}" wx:for="{{sfatyList}}" wx:key="index" data-index="{{index}}" bindtap="chooseSfaty">{{item.name}}</text>
+    <text class="sfaty-list {{sfatyActive==index?'sfaty-list-active':''}}" wx:for="{{sfatyList}}" wx:key="index" data-index="{{index}}" bindtap="chooseSfaty">{{item.scoName}}</text>
   </view>
   <view class="ec_view">
-    <ec-canvas id="mychart-dom-graph" canvas-id="mychart-graph" ec="{{ ecRadar }}" data-record="{{recordData}}" bind:init="echartInit"></ec-canvas>
+  <!-- data-record="{{cityDetail.citySafetyArray}}" bind:init="echartInitRadar" -->
+    <ec-canvas id="mychart-dom-graph" canvas-id="mychart-graph" ec="{{ ecRadar }}" ></ec-canvas>
   </view>
   <view class="ec_view" wx:if="{{sfatyActive!=0}}">
     <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ecLine }}"></ec-canvas>
