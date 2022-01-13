@@ -1,6 +1,6 @@
 /* pages/citydetail/citydetail.wxss */
 .citydetail-wrap {
-  padding-bottom: 50rpx;
+  padding-bottom: 70rpx;
 }
 
 .citydetail-top {
@@ -267,6 +267,16 @@ ec-canvas {
   font-size: 28rpx;
   color: #333;
   padding: 20rpx 30rpx;
+  line-height: 36rpx;
+}
+.info-data-style{
+  height: 300rpx;
+  overflow: hidden;
+  margin-bottom:30rpx;
+}
+
+.info-data div{
+  display: block;
 }
 
 .no-list {

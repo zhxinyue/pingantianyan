@@ -32,17 +32,17 @@
   </view>
   <view class="title-style">事件安全分析</view>
   <view class="sfaty-data">
-    <text class="sfaty-list {{sfatyActive==index?'sfaty-list-active':''}}" wx:for="{{sfatyList}}" wx:key="index" data-index="{{index}}" bindtap="chooseSfaty">{{item.scoName}}</text>
+    <text class="sfaty-list {{sfatyActive==index?'sfaty-list-active':''}}" wx:for="{{sfatyList}}" wx:key="index" data-index="{{index}}" data-scoid="{{item.scoId}}"  bindtap="chooseSfaty">{{item.scoName}}</text>
   </view>
-  <view class="ec_view">
-  <!-- data-record="{{cityDetail.citySafetyArray}}" bind:init="echartInitRadar" -->
-    <ec-canvas id="mychart-dom-graph" canvas-id="mychart-graph" ec="{{ ecRadar }}" ></ec-canvas>
+  <view class="ec_view" style="{{sfatyActive!=0?'height:0':'' }}" >
+    <ec-canvas id="mychart-dom-graph" canvas-id="mychart-graph" ec="{{ ecRadar }}" bind:init="echartInitRadar"></ec-canvas>
   </view>
   <view class="ec_view" wx:if="{{sfatyActive!=0}}">
-    <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ecLine }}"></ec-canvas>
+    <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ecLine }}" data-record="{{eventArray}}" bind:init="echartInitLine"></ec-canvas>
   </view>
   <block wx:if="{{sfatyActive!=0}}">
     <view class="title-style">近日安全信息</view>
+    <!-- newsArray -->
     <view class="sfaty-info" wx:for="{{sfatyInfo}}" wx:key="index" bindtap="toPath" data-path="newsdetail">
       <view class="news-left">
         <view class="news-list-text">近期曼谷遭遇了近半个世纪以来最大的洪灾</view>
@@ -56,7 +56,8 @@
   <view class="title-style">近3天天气情况</view>
   <view class="weather-wrap">
     <view class="weather-info">
-      <view class="weather-left">28℃ <text class="weather-tip">多云</text></view>
+    <!-- ℃ -->
+      <view class="weather-left">{{weatherData.temperature}} <text class="weather-tip">{{weatherData.naweather}}</text></view>
       <view class="shu"></view>
       <view class="weather-right">
         <view class="weather-top">
@@ -87,35 +88,36 @@
           </view>
         </view>
         <view class="weather-bottom">
-          <image src="../../img/icon28.png" class="icon28"></image>2021年08月09日07时00分（当地时间）
+          <image src="../../img/icon28.png" class="icon28"></image>{{weatherData.national_date}}
         </view>
       </view>
     </view>
     <view class="weather-list">
       <view class="weather-item weather-item1">
-        <view>08月09日</view>
+        <view>{{weatherData.forecastThreeWeather[0].tDate}}</view>
         <image src="../../img/icon29.png" class="weather-img"></image>
-        <view>雷阵雨</view>
-        <view>28℃-34℃</view>
+        <view>{{weatherData.forecastThreeWeather[0].tweather}}</view>
+        <view>{{weatherData.forecastThreeWeather[0].ttemperature}}</view>
         <view>...</view>
       </view>
       <view class="weather-item weather-item2">
-        <view>08月10日</view>
+        <view>{{weatherData.forecastThreeWeather[1].tDate}}</view>
         <image src="../../img/icon29.png" class="weather-img"></image>
-        <view>雷阵雨</view>
-        <view>28℃-34℃</view>
+        <view>{{weatherData.forecastThreeWeather[1].tweather}}</view>
+        <view>{{weatherData.forecastThreeWeather[1].ttemperature}}</view>
         <view>...</view>
       </view>
       <view class="weather-item weather-item3">
-        <view>08月11日</view>
+        <view>{{weatherData.forecastThreeWeather[2].tDate}}</view>
         <image src="../../img/icon29.png" class="weather-img"></image>
-        <view>雷阵雨</view>
-        <view>28℃-34℃</view>
+        <view>{{weatherData.forecastThreeWeather[2].tweather}}</view>
+        <view>{{weatherData.forecastThreeWeather[2].ttemperature}}</view>
         <view>...</view>
       </view>
     </view>
   </view>
   <view class="title-style">本年天气情况</view>
+  <!-- <rich-text nodes="{{weatherData.cwRainfall}}"></rich-text> -->
   <block wx:if="{{true}}">
     <view class="year-title">
       <text class="year-text1">月份</text>
@@ -146,17 +148,14 @@
   <view class="sfaty-data">
     <text class="sfaty-list {{infoActive==index?'sfaty-list-active':''}}" wx:for="{{infoList}}" wx:key="index" data-index="{{index}}" bindtap="chooseInfo">{{item.name}}</text>
   </view>
-  <block wx:if="{{true}}">
-    <view class="info-data">【国名】泰王国（The Kingdom of Thailand）。
-      【面积】51.3万平方公里。、马来西亚接壤，
-      东南临泰国湾（太平洋），西南濒安达曼海（印度洋）,
-      属热带季风气候，全年分为热、雨、凉三季，年均气温
-      27℃。
-      【首都】曼谷（Bangkok），人口800万</view>
+  <block wx:if="{{infoList[infoActive].content!=''}}">
+    <view class="info-data {{toggleInfoFlag?'info-data-style':''}}">
+      <rich-text nodes="{{infoList[infoActive].content}}"></rich-text>
+    </view>
     <view class="toggle-wrap">
-      <view bindtap="toggleYear" wx:if="{{toggleFlag}}" class="toggle-view">点击展开全部<image src="../../img/icon24.png" class="top-img top-img1"></image>
+      <view bindtap="toggleInfo" wx:if="{{toggleInfoFlag}}" class="toggle-view">点击展开全部<image src="../../img/icon24.png" class="top-img top-img1"></image>
       </view>
-      <view bindtap="toggleYear" wx:else class="toggle-view">收起<image src="../../img/icon24.png" class="top-img"></image>
+      <view bindtap="toggleInfo" wx:else class="toggle-view">收起<image src="../../img/icon24.png" class="top-img"></image>
       </view>
     </view>
   </block>

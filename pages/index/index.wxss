@@ -92,7 +92,7 @@
 }
 
 .word-img{
-width:22rpx;
+width:21rpx;
 height:33rpx;
 margin-right:15rpx;
 }

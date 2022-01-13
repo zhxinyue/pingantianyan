@@ -13,7 +13,7 @@
     </view>
     <view class="search-wrap" wx:if="{{matchCityList.length>0}}">
       <view class="search-word" wx:for="{{matchCityList}}"  wx:key="index" bindtap="searchIptVal" data-item="{{item}}">
-        <image src="../../img/icon20.png" class="word-img"></image>
+        <image src="../../img/icon30.png" class="word-img"></image>
         {{item.countryNameCn}}-{{item.cityNameCn}}
       </view>
 

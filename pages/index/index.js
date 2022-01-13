@@ -26,19 +26,29 @@ Page({
   },
 
   getCityNameVal(e) {
-    console.log(e.detail.value)
     this.setData({
       cityName: e.detail.value
     })
-    e.detail.value && this.matchCity(e.detail.value)
+    if (this.data.cityName != '') {
+      setTimeout(() => {
+        this.matchCity(this.data.cityName)
+      }, 500)
+
+    } else {
+      this.setData({
+        matchCityList: []
+      })
+    }
   },
   matchCity(value) {
+
     $matchCity(value).then(res => {
       console.log(res)
-        this.setData({
-          matchCityList: res.data.cityListArray || []
-        })
+      this.setData({
+        matchCityList: res.data.cityListArray || []
+      })
     })
+
   },
 
   delIptVal() {

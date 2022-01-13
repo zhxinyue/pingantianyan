@@ -1,8 +1,12 @@
 // pages/citydetail/citydetail.js
 import * as echarts from '../../ec-canvas/echarts';
 import {
-  $getCityScore
+  $getCityScore,$getCityWeather,$getCountryIntro,$getEventNews
 } from '../../utils/api'
+let a = null
+let b = null
+let c = null
+let d = null
 Page({
 
   /**
@@ -11,41 +15,30 @@ Page({
   data: {
     cityItem:{},
     cityDetail:{},
+    eventArray:[],
+    newsArray:[],
+    countryData:{},
+    weatherData:{},
     cityName: '',
     sfatyList: [{
       scoName: '综合安全'
     }],
     sfatyActive: 0,
-    infoList: [{
-      name: '国家概况'
-    }, {
-      name: '入境居留'
-    }, {
-      name: '安全保护'
-    }, {
-      name: '交通出行'
-    }, {
-      name: '物价医疗'
-    }, {
-      name: '实用信息'
-    }, {
-      name: '使馆信息'
-    }],
+    infoList: [],
     infoActive: 0,
     sfatyInfo: [{}, {}, {}],
     yearData: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
     yearDataShow: [{}, {}, {}, {}, {}, {}],
     toggleFlag: true,
+    toggleInfoFlag: true,
     //echarts数据
     ecRadar: {
-      onInit: initChartRadar
+      // onInit: initChartRadar
     },
     ecLine: {
-      onInit: initChartLine
+      // onInit: initChartLine
     },
-
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -54,15 +47,62 @@ Page({
 //   cityItem:JSON.parse(wx.getStorageSync('item'))
 // })
 this.setData({
-  cityItem:{"stateNameCn":"纽约州","stateNameEn":"New York","cityNameCn":"罗切斯特","countryNameCn":"美国","cityNameEn":"Rochester","cityId":"ct20210913150658811","countryId":"cou20210913102855592","countryNameEn":"United States"}
+  cityItem:{"stateNameCn":"大西洋省","stateNameEn":"Atlantic Province","cityNameCn":"巴兰基亚","countryNameCn":"哥伦比亚","cityNameEn":"Barranquilla","cityId":"ct20210913150614308","countryId":"cou20210913102854014","countryNameEn":"Colombia"}
 })
 console.log(this.data.cityItem)
 wx.setNavigationBarTitle({
   title: this.data.cityItem.cityNameCn
 })
-this.getCityScore()
+this.getCityWeather()
+this.getCountryIntro()
   },
-
+  getCityWeather(){
+    
+    $getCityWeather(this.data.cityItem.cityId).then(res=>{
+console.log(res)
+this.setData({
+  weatherData:res.data
+})
+    })
+  },
+  getCountryIntro(){
+    $getCountryIntro(this.data.cityItem.countryId).then(res=>{
+      const info =  [{
+        name: '国家概况',
+        content:res.data.countryBaseInfo.replace(/style="display: none;"/g, '')
+      }, {
+        name: '入境居留',
+        content:res.data.countryEntryResidence.replace(/style="display: none;"/g, '')
+      }, {
+        name: '安全保护',
+        content:res.data.countrySafeguard.replace(/style="display: none;"/g, '')
+      }, {
+        name: '交通出行',
+        content:res.data.countryTransportation.replace(/style="display: none;"/g, '')
+      }, {
+        name: '物价医疗',
+        content:res.data.countryPriceMedical.replace(/style="display: none;"/g, '')
+      }, {
+        name: '实用信息',
+        content:res.data.countryPracticalInfo.replace(/style="display: none;"/g, '')
+      }, {
+        name: '使馆信息',
+        content:res.data.countryEmbassyInfo.replace(/style="display: none;"/g, '')
+      }]
+      this.setData({
+        infoList:info
+      })
+          })
+  },
+  getEventNews(scoId){
+    $getEventNews(scoId,this.data.cityItem.cityId).then(res=>{
+      this.setData({
+        eventArray:res.data.eventArray,
+        newsArray:res.data.newsArray
+      })
+      a && initChartLine(a,b,c,d,res.data.eventArray)
+    })
+  },
   getCityNameVal(e) {
     this.setData({
       cityName: e.detail.value
@@ -76,21 +116,12 @@ this.getCityScore()
   searchIptVal() {
 
   },
-  getCityScore(){
-    $getCityScore(this.data.cityItem.cityId).then(res => {
-      console.log(res.data.citySafetyArray)
-      const array =JSON.parse(JSON.stringify(this.data.sfatyList)).concat(res.data.citySafetyArray)
-        this.setData({
-          cityDetail: res.data,
-          sfatyList:array
-        })
-        // echartInitRadar(res.data.citySafetyArray)
-    })
-  },
   chooseSfaty(e) {
     this.setData({
       sfatyActive: e.target.dataset.index
     })
+    const scoId = e.target.dataset.scoid
+    e.target.dataset.index!=0 && this.getEventNews(scoId)
   },
   chooseInfo(e) {
     this.setData({
@@ -111,34 +142,53 @@ this.getCityScore()
       })
     }
   },
-  echartInitRadar(e) {
-  // console.log(record)
-    // const recordData = e.target.dataset.record;
-  
-    // console.log(this.data.cityDetail.citySafetyArray)
-    this.data.cityDetail.citySafetyArray?.length &&  initChartRadar(e.detail.canvas, e.detail.width, e.detail.height, this.data.cityDetail.citySafetyArray);
+  toggleInfo(){
+    this.setData({
+      toggleInfoFlag: !this.data.toggleInfoFlag
+    })
+  },
+  async echartInitRadar(e) {
+    console.log(e)
+  if(this.data.cityDetail.ScoreGrade){// 已经获取到数据
+    return
   }
-
+  const res = await $getCityScore(this.data.cityItem.cityId)
+  const array =JSON.parse(JSON.stringify(this.data.sfatyList)).concat(res.data.citySafetyArray)
+  this.setData({
+    cityDetail: res.data,
+    sfatyList:array
+  })
+    console.log(this.data.cityDetail.citySafetyArray)
+    this.data.cityDetail.citySafetyArray?.length &&  initChartRadar(e.detail.canvas, e.detail.width, e.detail.height, e.detail.dpr,this.data.cityDetail.citySafetyArray);
+  },
+  echartInitLine(e){
+    console.log(e.target.dataset.record)
+    a = e.detail.canvas
+    b = e.detail.width
+    c = e.detail.height
+    d = e.detail.dpr
+    e.target.dataset.record && initChartLine(a, b, c, d,e.target.dataset.record)
+  },
 })
 // 雷达图
-function initChartRadar(canvas, width, height) {
+function initChartRadar(canvas, width, height,dpr,recordData) {
+  console.log('recordData-----'+recordData)
   const chart = echarts.init(canvas, null, {
     width: width,
-    height: height
+    height: height,
+    devicePixelRatio: dpr // new
   });
   canvas.setChart(chart);
-console.log(cityDetail.citySafetyArray)
-const indicatorList = recordData.map((item)=>{
+const indicatorList = recordData?.map((item)=>{
   return {
-    name:item.scoName
+    name:item.scoName,
+    min:0,
+    max:100
   }
 })
-const seriesData =  recordData.map((item)=>{
-  return item.cityScore
-  
+const seriesData =  recordData?.map((item)=>{
+  return item.cityScore<0?0: item.cityScore
 })
-console.log('indicatorList'+indicatorList)
-console.log('seriesData'+seriesData)
   var option = {
     backgroundColor: "#ffffff",
     color: "#07466F",
@@ -149,31 +199,7 @@ console.log('seriesData'+seriesData)
       show: false
     },
     radar: {
-      indicator: [{
-          name: '战争冲突',
-          max: 100
-        },
-        {
-          name: '恐怖袭击',
-          max: 100
-        },
-        {
-          name: '示威骚乱',
-          max: 100
-        },
-        {
-          name: '传染疫病',
-          max: 100
-        },
-        {
-          name: '社会治安',
-          max: 100
-        },
-        {
-          name: '自然灾害',
-          max: 100
-        }
-      ],
+      indicator: indicatorList,
       name: {
         textStyle: {
           color: '#6B6B6B'
@@ -186,12 +212,10 @@ console.log('seriesData'+seriesData)
         }
       },
     },
-
     series: [{
       type: 'radar',
       data: [{
-        value: [30, -40,-130, 70, 90, 80],
-        name: '预算'
+        value:  seriesData
       }]
     }]
   };
@@ -206,12 +230,19 @@ console.log('seriesData'+seriesData)
   return chart;
 }
 // 折线图
-function initChartLine(canvas, width, height) {
+function initChartLine(canvas, width, height,dpr,recordData) {
   const chart = echarts.init(canvas, null, {
     width: width,
-    height: height
+    height: height,
+    devicePixelRatio: dpr // new
   });
   canvas.setChart(chart);
+  const xAxisData = recordData?.map((item)=>{
+    return item.sctName
+  })
+  const seriesData = recordData?.map((item)=>{
+    return item.safetyClassificationEventNum
+  })
   var option = {
     title: {
       subtext: '（近一年发生的次数)'
@@ -226,7 +257,7 @@ function initChartLine(canvas, width, height) {
     },
     xAxis: {
       type: 'category',
-      data: ['水灾', '火灾', '地震', '火山', '海啸', '塌陷', '山体滑坡'],
+      data: xAxisData,
       axisLabel: {
         textStyle: {
           color: '#6B6B6B',
@@ -266,7 +297,7 @@ function initChartLine(canvas, width, height) {
     series: [{
       name: 'A',
       type: 'line',
-      data: [18, 36, 65, 30, 78, 40, 33]
+      data: seriesData
     }]
   };
 
