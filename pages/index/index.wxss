@@ -126,6 +126,7 @@ margin-right:15rpx;
   margin-top: 25rpx;
   padding: 10rpx 30rpx;
   box-sizing: border-box;
+  overflow-y: scroll;
 }
 
 .hot-list {

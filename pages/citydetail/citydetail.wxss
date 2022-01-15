@@ -264,18 +264,26 @@ ec-canvas {
 }
 
 .info-data {
-  font-size: 28rpx;
+  font-size: 28rpx!important;
   color: #333;
-  padding: 20rpx 30rpx;
+  padding: 0rpx 30rpx;
   line-height: 36rpx;
-}
-.info-data-style{
-  height: 300rpx;
-  overflow: hidden;
-  margin-bottom:30rpx;
+  margin: 20rpx 0;
+  width:100%;
+  box-sizing: border-box;
+  overflow-x: scroll;
 }
 
-.info-data div{
+.info-data-style {
+  margin-bottom: 30rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+}
+
+.info-data div {
   display: block;
 }
 

@@ -41,29 +41,28 @@ Page({
     }
   },
   matchCity(value) {
-
     $matchCity(value).then(res => {
       console.log(res)
       this.setData({
         matchCityList: res.data.cityListArray || []
       })
     })
-
   },
 
   delIptVal() {
     this.setData({
-      cityName: ''
+      cityName: '',
+      matchCityList: []
     })
   },
   searchIptVal(e) {
     const item = e.currentTarget.dataset.item
-    wx.setStorageSync('item', JSON.stringify(item))
-    if (this.data.cityName == '') {
+    if (item == '') {
       this.setData({
         popFlag: !this.data.popFlag
       })
     } else {
+      wx.setStorageSync('item', JSON.stringify(item))
       wx.navigateTo({
         url: `/pages/citydetail/citydetail`
       })

@@ -32,9 +32,9 @@
   </view>
   <view class="title-style">事件安全分析</view>
   <view class="sfaty-data">
-    <text class="sfaty-list {{sfatyActive==index?'sfaty-list-active':''}}" wx:for="{{sfatyList}}" wx:key="index" data-index="{{index}}" data-scoid="{{item.scoId}}"  bindtap="chooseSfaty">{{item.scoName}}</text>
+    <text class="sfaty-list {{sfatyActive==index?'sfaty-list-active':''}}" wx:for="{{sfatyList}}" wx:key="index" data-index="{{index}}" data-scoid="{{item.scoId}}" bindtap="chooseSfaty">{{item.scoName}}</text>
   </view>
-  <view class="ec_view" style="{{sfatyActive!=0?'height:0':'' }}" >
+  <view class="ec_view" style="{{sfatyActive!=0?'height:0':'' }}">
     <ec-canvas id="mychart-dom-graph" canvas-id="mychart-graph" ec="{{ ecRadar }}" bind:init="echartInitRadar"></ec-canvas>
   </view>
   <view class="ec_view" wx:if="{{sfatyActive!=0}}">
@@ -42,96 +42,105 @@
   </view>
   <block wx:if="{{sfatyActive!=0}}">
     <view class="title-style">近日安全信息</view>
-    <!-- newsArray -->
-    <view class="sfaty-info" wx:for="{{sfatyInfo}}" wx:key="index" bindtap="toPath" data-path="newsdetail">
+    <view class="sfaty-info" wx:for="{{newsArray}}" wx:for-item='it' wx:key="index" bindtap="toPath" data-path="newsdetail" data-detail="{{it}}" wx:if="{{index<3}}">
       <view class="news-left">
-        <view class="news-list-text">近期曼谷遭遇了近半个世纪以来最大的洪灾</view>
-        <text class="news-list-time">2021-08-17 10:36</text>
+        <view class="news-list-text">{{it.snTitle}}</view>
+        <text class="news-list-time">{{it.snCreatetime}}</text>
       </view>
-      <view class="news-right">
+      <!-- TODO: 目前没有图片字段 -->
+      <!-- <view class="news-right">
         <image src="../../img/icon6.png" class="news-list-img"></image>
-      </view>
+      </view> -->
+    </view>
+    <view class="no-list" wx:if="{{newsArray.length<=0}}">
+      <image src="../../img/icon23.png" class="no-img"></image>
+      <view class="no-text">暂无安全信息</view>
     </view>
   </block>
-  <view class="title-style">近3天天气情况</view>
-  <view class="weather-wrap">
-    <view class="weather-info">
-    <!-- ℃ -->
-      <view class="weather-left">{{weatherData.temperature}} <text class="weather-tip">{{weatherData.naweather}}</text></view>
-      <view class="shu"></view>
-      <view class="weather-right">
-        <view class="weather-top">
-          <view class="weather-top-view">
-            <image src="../../img/icon25.png" class="icon25"></image>
-            <view class="weather-top-info">
-              <view>空气湿度</view>
-              <view>81%</view>
-            </view>
-          </view>
+    <view class="title-style">近3天天气情况</view>
+    <view class="weather-wrap" wx:if="{{weatherData.temperature!=''}}">
+      <view class="weather-info">
+        <!-- ℃ -->
+        <view class="weather-left">{{weatherData.temperature}} <text class="weather-tip">{{weatherData.naweather}}</text></view>
+        <view class="shu"></view>
+        <view class="weather-right">
           <view class="weather-top">
             <view class="weather-top-view">
-              <image src="../../img/icon26.png" class="icon26"></image>
+              <image src="../../img/icon25.png" class="icon25"></image>
               <view class="weather-top-info">
-                <view>紫外线</view>
-                <view>--</view>
+                <view>空气湿度</view>
+                <view>81%</view>
+              </view>
+            </view>
+            <view class="weather-top">
+              <view class="weather-top-view">
+                <image src="../../img/icon26.png" class="icon26"></image>
+                <view class="weather-top-info">
+                  <view>紫外线</view>
+                  <view>--</view>
+                </view>
+              </view>
+            </view>
+            <view class="weather-top">
+              <view class="weather-top-view">
+                <image src="../../img/icon27.png" class="icon27"></image>
+                <view class="weather-top-info">
+                  <view>无风</view>
+                  <view>0Km/h</view>
+                </view>
               </view>
             </view>
           </view>
-          <view class="weather-top">
-            <view class="weather-top-view">
-              <image src="../../img/icon27.png" class="icon27"></image>
-              <view class="weather-top-info">
-                <view>无风</view>
-                <view>0Km/h</view>
-              </view>
-            </view>
+          <view class="weather-bottom">
+            <image src="../../img/icon28.png" class="icon28"></image>{{weatherData.national_date}}
           </view>
         </view>
-        <view class="weather-bottom">
-          <image src="../../img/icon28.png" class="icon28"></image>{{weatherData.national_date}}
+      </view>
+      <view class="weather-list">
+        <view class="weather-item weather-item1">
+          <view>{{weatherData.forecastThreeWeather[0].tDate}}</view>
+          <image src="{{weatherData.forecastThreeWeather[0].tweatherIcon.wcBase64}}" class="weather-img"></image>
+          <view>{{weatherData.forecastThreeWeather[0].tweather}}</view>
+          <view>{{weatherData.forecastThreeWeather[0].ttemperature}}</view>
+          <view>...</view>
+        </view>
+        <view class="weather-item weather-item2">
+          <view>{{weatherData.forecastThreeWeather[1].tDate}}</view>
+          <image src="{{weatherData.forecastThreeWeather[1].tweatherIcon.wcBase64}}" class="weather-img"></image>
+          <view>{{weatherData.forecastThreeWeather[1].tweather}}</view>
+          <view>{{weatherData.forecastThreeWeather[1].ttemperature}}</view>
+          <view>...</view>
+        </view>
+        <view class="weather-item weather-item3">
+          <view>{{weatherData.forecastThreeWeather[2].tDate}}</view>
+          <image src="{{weatherData.forecastThreeWeather[2].tweatherIcon.wcBase64}}" class="weather-img"></image>
+          <view>{{weatherData.forecastThreeWeather[2].tweather}}</view>
+          <view>{{weatherData.forecastThreeWeather[2].ttemperature}}</view>
+          <view>...</view>
         </view>
       </view>
     </view>
-    <view class="weather-list">
-      <view class="weather-item weather-item1">
-        <view>{{weatherData.forecastThreeWeather[0].tDate}}</view>
-        <image src="../../img/icon29.png" class="weather-img"></image>
-        <view>{{weatherData.forecastThreeWeather[0].tweather}}</view>
-        <view>{{weatherData.forecastThreeWeather[0].ttemperature}}</view>
-        <view>...</view>
-      </view>
-      <view class="weather-item weather-item2">
-        <view>{{weatherData.forecastThreeWeather[1].tDate}}</view>
-        <image src="../../img/icon29.png" class="weather-img"></image>
-        <view>{{weatherData.forecastThreeWeather[1].tweather}}</view>
-        <view>{{weatherData.forecastThreeWeather[1].ttemperature}}</view>
-        <view>...</view>
-      </view>
-      <view class="weather-item weather-item3">
-        <view>{{weatherData.forecastThreeWeather[2].tDate}}</view>
-        <image src="../../img/icon29.png" class="weather-img"></image>
-        <view>{{weatherData.forecastThreeWeather[2].tweather}}</view>
-        <view>{{weatherData.forecastThreeWeather[2].ttemperature}}</view>
-        <view>...</view>
-      </view>
-    </view>
+    <view class="no-list" wx:else>
+    <image src="../../img/icon23.png" class="no-img"></image>
+    <view class="no-text">暂无天气情况</view>
   </view>
+ 
+
   <view class="title-style">本年天气情况</view>
-  <!-- <rich-text nodes="{{weatherData.cwRainfall}}"></rich-text> -->
   <block wx:if="{{true}}">
     <view class="year-title">
       <text class="year-text1">月份</text>
-      <text class="year-text2">日均最低温度</text>
-      <text class="year-text3">日均最高温度</text>
-      <text class="year-text4">平均总降水量</text>
-      <text class="year-text5">平均降水系数</text>
+      <text class="year-text2">日均最高气温</text>
+      <text class="year-text3">日均最低气温</text>
+      <text class="year-text4">平均降水总量</text>
+      <text class="year-text5">平均降水天数</text>
     </view>
-    <view class="year-title year-data" wx:for="{{yearDataShow}}" wx:key="index">
-      <text class="year-text1">{{index+1}}月</text>
-      <text class="year-text2">21.0</text>
-      <text class="year-text3">32.0</text>
-      <text class="year-text4">32.0</text>
-      <text class="year-text5">32.0</text>
+    <view class="year-title year-data" wx:for="{{yearDataShow}}" wx:if="{{index!=0 }}" wx:key="index">
+      <text class="year-text1">{{item[0]}}</text>
+      <text class="year-text2">{{item[1]}}</text>
+      <text class="year-text3">{{item[2]}}</text>
+      <text class="year-text4">{{item[3]}}mm</text>
+      <text class="year-text5">{{item[4]}}</text>
     </view>
     <view class="toggle-wrap">
       <view bindtap="toggleYear" wx:if="{{toggleFlag}}" class="toggle-view">点击展开全部<image src="../../img/icon24.png" class="top-img top-img1"></image>
@@ -161,6 +170,6 @@
   </block>
   <view class="no-list" wx:else>
     <image src="../../img/icon23.png" class="no-img"></image>
-    <view class="no-text">暂无实用信息指南</view>
+    <view class="no-text">暂无信息指南</view>
   </view>
 </view>
