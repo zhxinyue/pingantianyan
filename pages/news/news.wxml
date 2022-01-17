@@ -4,6 +4,7 @@
   <view class="select-view" bindtap="togglePop">点击选择近72小时内发生安全事件的国家
     <image src="../../img/icon7.png" class="select-img"></image>
   </view>
+  <block wx:if="{{eventArray.length>0}}">
   <view wx:for="{{eventArray}}" wx:key="index" wx:for-item='item' wx:if="{{activeCity==''||activeCity==item.cityId}}">
     <view class="news-list" wx:for="{{item.newsArray}}" wx:for-item='it' bindtap="toPath" data-path="newsdetail" data-detail="{{it}}">
       <view class="news-left">
@@ -16,6 +17,11 @@
       <image src="../../img/icon6.png" class="news-list-img"></image>
     </view> -->
   </view>
+</block>
+  <view class="no-list" wx:else>
+    <image src="../../img/icon23.png" class="no-img"></image>
+    <view class="no-text">暂无安全事件</view>
+  </view>
   <!-- 选择国家 -->
   <view class="wx-popup" catchtouchmove="true" wx:if="{{popFlag}}">
     <view class="popup-container">
@@ -24,6 +30,14 @@
       <view class="popup-list">
         <text class="list-item {{activeCity==item.cityId?'list-item-active':''}}" wx:for="{{eventArray}}" wx:key="index" bindtap="chooseCity" data-cityid="{{item.cityId}}">{{item.countryNameCn}}</text>
       </view>
+    </view>
+  </view>
+    <!-- 提示 -->
+    <view class="wx-popup" catchtouchmove="true" wx:if="{{popFlag2}}">
+    <view class="popup-container-center">
+      <image src="../../img/icon18.png" class="pop-img"></image>
+      <text class="pop-text">暂无近72小时内发生安全事件的国家！</text>
+      <view class="pop-button" bindtap="closePopup">确 认</view>
     </view>
   </view>
 </view>

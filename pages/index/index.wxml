@@ -7,14 +7,14 @@
       <view class="del-view" bindtap="delIptVal">
         <image src="../../img/icon10.png" class="input-close"></image>
       </view>
-      <view class="input-search"><text>安全指数</text>
-        <image src="../../img/icon11.png" class="search-img" bindtap="searchIptVal" data-item="{{matchCityList.length>0?matchCityList[0]:''}}"></image>
+      <view class="input-search" bindtap="searchIptVal" data-item="{{matchCityList.length>0?matchCityList[0]:''}}"><text>安全指数</text>
+        <image src="../../img/icon11.png" class="search-img" ></image>
       </view>
     </view>
     <view class="search-wrap" wx:if="{{matchCityList.length>0}}">
       <view class="search-word" wx:for="{{matchCityList}}"  wx:key="index" bindtap="searchIptVal" data-item="{{item}}">
         <image src="../../img/icon30.png" class="word-img"></image>
-        {{item.countryNameCn}}-{{item.cityNameCn}}
+        {{item.countryNameCn}}-{{item.stateNameCn}}-{{item.cityNameCn}}
       </view>
 
     </view>

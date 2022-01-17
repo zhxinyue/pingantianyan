@@ -329,12 +329,12 @@ ec-canvas {
 
 .weather-info {
   height: 150rpx;
-  padding: 0 60rpx;
+  padding: 0 50rpx;
   clear: both;
 }
 
 .weather-left {
-  width: 200rpx;
+  width: 190rpx;
   line-height: 150rpx;
   font-size: 60rpx;
   color: #2A3B59;
@@ -356,7 +356,7 @@ ec-canvas {
 }
 
 .weather-right {
-  width: 405rpx;
+  width: 415rpx;
   height: 150rpx;
   float: left;
   font-size: 20rpx;

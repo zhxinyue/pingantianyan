@@ -69,10 +69,19 @@ Page({
   },
   getCityWeather() {
     $getCityWeather(this.data.cityItem.cityId).then(res => {
+      console.log(res.data)
+      console.log(res.data.humidity)
+      if(res.data && res.data.humidity){
+        console.log(1111)
+      res.data.humidity = getStr(res.data.humidity,' ')
+      res.data.ziwaixian = getStr(res.data.ziwaixian,' ')
+      res.data.windpower = getStr(res.data.windpower,' ')
       this.setData({
         weatherData: res.data,
-        yearDataShow: res.data.cwRainfall.slice(0, 7)
+        yearDataShow: res.data.cwRainfall.slice(0, 7),
       })
+    }
+
     })
   },
   getCountryIntro() {
@@ -321,3 +330,9 @@ function initChartLine(canvas, width, height, dpr, recordData) {
   chart.setOption(option);
   return chart;
 }
+// 截取字符串
+function getStr(string,str){ 
+  var str_before = string.split(str)[0]; 
+  var str_after = string.split(str)[1]; 
+  return str_after
+} 
